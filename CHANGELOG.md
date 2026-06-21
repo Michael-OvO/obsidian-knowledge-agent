@@ -1,0 +1,44 @@
+# Changelog
+
+All notable changes to this project are documented here. The format follows
+[Keep a Changelog](https://keepachangelog.com/), and the project aims to follow
+[Semantic Versioning](https://semver.org/).
+
+## [2.0.0] — 2026-06-20
+
+### Added — the agent now self-evolves
+- **Recall → reflect learning loop** ([`.agents/self-evolution.md`](.agents/self-evolution.md)):
+  the agent reads what it learned about a vault before each run (Phase 0, Step 0) and
+  reflects afterward (Phase 7) to improve its own rules.
+- **Per-vault learned state** under `.agents/learned/`: an append-only `journal.md`,
+  a distilled `conventions.md`, few-shot `examples.md`, and generated playbooks in
+  `skills/`. Seeded automatically by the installer.
+- **Two-tier autonomy**: the journal is written freely; rule changes are surfaced as a
+  git diff for approval, with consolidation and precedence rules to prevent drift.
+
+### Added — official Claude Code plugin + marketplace
+- This repo is now a **Claude Code marketplace** (`.claude-plugin/marketplace.json`)
+  hosting the **`obsidian-knowledge` plugin** (`plugins/obsidian-knowledge/`).
+- Install via `/plugin marketplace add Michael-OvO/obsidian-knowledge-agent` then
+  `/plugin install obsidian-knowledge@obsidian-knowledge-agent`.
+- **Slash commands**: `/obsidian-knowledge:ingest`, `:reflect`, `:evolve`.
+- **Hooks**: `SessionStart` auto-recalls learned conventions; `Stop` nudges reflection
+  when notes changed but the journal is untouched.
+
+### Added — quality & trust
+- A real **wikilink validator** (`validate_links.py`) — previously claimed, now shipped
+  — plus a **manifest validator** (`validate_manifests.py`), both run in **CI**.
+- `examples/EVOLUTION.md` — a worked before/after that demonstrates the loop.
+- `CONTRIBUTING.md`, a CHANGELOG, and issue/PR templates.
+
+### Changed
+- The skill moved from `skills/` to `plugins/obsidian-knowledge/skills/`; the installer
+  and `sync-skill.sh` paths were updated accordingly. The bare-skill and vault installs
+  still work as before.
+
+## [1.0.0] — 2026-06-20
+
+### Added
+- Initial release: the `ingest → compile → distribute` pipeline, the teaching-note
+  style guide, Obsidian conventions, vault architecture, a worked example, and a
+  one-line installer.

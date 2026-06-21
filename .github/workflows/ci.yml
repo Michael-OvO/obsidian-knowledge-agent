@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate plugin + marketplace manifests
+        run: python3 scripts/validate_manifests.py
+
+      - name: Validate example wikilinks
+        run: python3 plugins/obsidian-knowledge/scripts/validate_links.py examples/output
+
+      - name: Shell scripts parse cleanly
+        run: |
+          for f in install.sh scripts/*.sh plugins/obsidian-knowledge/scripts/*.sh; do
+            echo "bash -n $f"
+            bash -n "$f"
+          done
+
+      - name: Skill references are in sync with .agents/
+        run: |
+          bash scripts/sync-skill.sh
+          if ! git diff --quiet -- plugins/obsidian-knowledge/skills/obsidian-knowledge/references; then
+            echo "::error::Skill references are out of sync. Run scripts/sync-skill.sh and commit."
+            git --no-pager diff -- plugins/obsidian-knowledge/skills/obsidian-knowledge/references
+            exit 1
+          fi

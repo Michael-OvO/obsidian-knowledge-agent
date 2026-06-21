@@ -62,7 +62,7 @@ else
   SRC="$(find "$TMP" -maxdepth 1 -type d -name 'obsidian-knowledge-agent-*')"
   [[ -n "$SRC" && -f "$SRC/AGENTS.md" ]] || { echo "Error: download failed." >&2; exit 1; }
 fi
-cleanup() { [[ -n "$CLEANUP" ]] && rm -rf "$CLEANUP"; }
+cleanup() { [[ -n "$CLEANUP" ]] && rm -rf "$CLEANUP"; return 0; }
 trap cleanup EXIT
 
 install_vault() {
@@ -80,15 +80,61 @@ install_vault() {
   mkdir -p "$vault/.agents"
   cp "$SRC/.agents/"*.md "$vault/.agents/"
   mkdir -p "$vault/Inbox"
-  echo "Installed vault files (AGENTS.md, .agents/, Inbox/) into: $vault"
+  seed_learned "$vault"
+  echo "Installed vault files (AGENTS.md, .agents/, .agents/learned/, Inbox/) into: $vault"
+}
+
+# Seed the per-vault self-evolution state. Never clobbers existing learned files.
+seed_learned() {
+  local vault="$1"
+  mkdir -p "$vault/.agents/learned/skills"
+  [[ -e "$vault/.agents/learned/skills/.gitkeep" ]] || : > "$vault/.agents/learned/skills/.gitkeep"
+
+  if [[ ! -f "$vault/.agents/learned/journal.md" ]]; then
+    cat > "$vault/.agents/learned/journal.md" <<'EOF'
+# Learning Journal
+
+> Append-only log of every ingestion run. The agent adds one dated entry per run;
+> past entries are never edited or deleted. See `.agents/self-evolution.md`.
+EOF
+  fi
+
+  if [[ ! -f "$vault/.agents/learned/conventions.md" ]]; then
+    cat > "$vault/.agents/learned/conventions.md" <<'EOF'
+# Learned Conventions
+
+> Distilled, vault-specific rules the agent has learned. These override the
+> defaults in `.agents/*.md`, but never the core rules or your explicit
+> instructions. The agent proposes changes here as a git diff for you to approve.
+>
+> Empty for now — the agent fills this in as it learns your vault.
+EOF
+  fi
+
+  if [[ ! -f "$vault/.agents/learned/examples.md" ]]; then
+    cat > "$vault/.agents/learned/examples.md" <<'EOF'
+# Classification Examples
+
+> Few-shot input -> classification decisions the agent has learned, so it
+> classifies new material the way you prefer. The agent appends rows here.
+
+| Input signature | Classified as | Target |
+|---|---|---|
+EOF
+  fi
 }
 
 install_skill() {
   local dest="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
   mkdir -p "$dest"
   rm -rf "$dest/obsidian-knowledge"
-  cp -R "$SRC/skills/obsidian-knowledge" "$dest/"
+  cp -R "$SRC/plugins/obsidian-knowledge/skills/obsidian-knowledge" "$dest/"
   echo "Installed Claude Code skill 'obsidian-knowledge-ingest' into: $dest/obsidian-knowledge"
+  echo
+  echo "Tip: for slash commands (/obsidian-knowledge:ingest, :reflect, :evolve) and the"
+  echo "self-evolution hooks, install the full plugin instead of the bare skill:"
+  echo "  /plugin marketplace add Michael-OvO/obsidian-knowledge-agent"
+  echo "  /plugin install obsidian-knowledge@obsidian-knowledge-agent"
 }
 
 case "$MODE" in
@@ -100,3 +146,6 @@ esac
 echo
 echo "Done. Drop a syllabus, paper set, book TOC, or topic brief into your vault's Inbox/,"
 echo "then ask your agent to \"ingest the material in Inbox into the vault\"."
+echo
+echo "The agent recalls what it learned at the start of each run and reflects at the end —"
+echo "watch .agents/learned/ grow as it adapts to your vault."

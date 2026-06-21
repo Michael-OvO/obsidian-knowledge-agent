@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "obsidian-knowledge-agent",
+  "owner": {
+    "name": "Michael-OvO",
+    "url": "https://github.com/Michael-OvO"
+  },
+  "description": "A self-evolving knowledge agent: turns raw material into teaching-quality Obsidian notes and learns your vault's conventions from every run.",
+  "plugins": [
+    {
+      "name": "obsidian-knowledge",
+      "source": "./plugins/obsidian-knowledge",
+      "description": "Self-evolving ingest -> compile -> distribute pipeline for Obsidian. Classifies raw material, scaffolds a folder tree, writes notes that teach, builds a concept-graph canvas, validates wikilinks, then reflects on each run to improve its own rules.",
+      "version": "2.0.0",
+      "author": { "name": "Michael-OvO", "url": "https://github.com/Michael-OvO" },
+      "homepage": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+      "repository": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+      "license": "MIT",
+      "keywords": ["obsidian", "knowledge-management", "pkm", "self-evolving", "notes", "skills"],
+      "category": "productivity"
+    }
+  ]
+}

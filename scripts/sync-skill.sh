@@ -5,5 +5,7 @@ set -euo pipefail
 # canonical instruction modules in .agents/. Run this after editing .agents/.
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cp "$ROOT/.agents/"*.md "$ROOT/skills/obsidian-knowledge/references/"
-echo "Synced .agents/ -> skills/obsidian-knowledge/references/"
+DEST="$ROOT/plugins/obsidian-knowledge/skills/obsidian-knowledge/references"
+mkdir -p "$DEST"
+cp "$ROOT/.agents/"*.md "$DEST/"
+echo "Synced .agents/ -> plugins/obsidian-knowledge/skills/obsidian-knowledge/references/"

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "obsidian-knowledge",
+  "displayName": "Obsidian Knowledge Agent",
+  "version": "2.0.0",
+  "description": "Self-evolving pipeline that turns raw material (PDFs, slides, syllabi, papers, transcripts, URL lists) into teaching-quality Obsidian notes — and learns your vault's conventions from each run.",
+  "author": { "name": "Michael-OvO", "url": "https://github.com/Michael-OvO" },
+  "homepage": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+  "repository": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+  "license": "MIT",
+  "keywords": ["obsidian", "knowledge-management", "pkm", "self-evolving", "notes"],
+  "hooks": "./hooks/hooks.json"
+}

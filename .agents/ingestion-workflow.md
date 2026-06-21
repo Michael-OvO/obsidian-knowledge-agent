@@ -5,6 +5,7 @@
 > **Before Phase 0, read:**
 > - `.agents/style-guide.md` for note quality
 > - `.agents/obsidian-conventions.md` for frontmatter, links, naming, and canvas rules
+> - `.agents/self-evolution.md` for the recall → reflect learning loop (Phase 0 recall, Phase 7 reflect)
 
 **Purpose:** Transform a syllabus, book, paper collection, article, transcript, or topic brief into a navigable knowledge structure with short, clean, teaching-quality notes plus the metadata and navigation needed to support them.
 
@@ -22,6 +23,16 @@ The exact target is determined in Phase 0. See `.agents/vault-architecture.md` f
 
 **Input:** Raw material in `Inbox/` (docx, pdf, markdown, URL list, transcript, etc.)
 **Output:** Resolved input profile, target path, and structural map. No files created yet.
+
+### Step 0: Recall learned state
+
+Before classifying, load what this vault has taught you (see `.agents/self-evolution.md`):
+
+- Read `.agents/learned/conventions.md` (if present) — vault-specific overrides that refine the defaults. Apply them this run.
+- Read `.agents/learned/examples.md` (if present) — use the closest input→classification rows as few-shot guidance.
+- Scan `.agents/learned/skills/` — if a playbook's `trigger:` matches this input, follow it instead of re-deriving the approach.
+
+On a fresh vault these files do not exist yet; recall is silent and you proceed normally.
 
 ### Step 1: Locate input
 
@@ -319,6 +330,26 @@ If the user explicitly approves Inbox clearing, make that a second, separate com
 
 ---
 
+## Phase 7: Reflect and Evolve
+
+**Input:** The completed run, plus any corrections the user made
+**Output:** A journal entry, and (when there is a durable lesson) proposed updates to the vault's learned rules
+
+> **Reference:** Follow `.agents/self-evolution.md` for the full loop and drift-control rules.
+
+This is what makes the agent self-improving: turn the run into a reusable lesson.
+
+1. **Always append to the journal.** Add one dated entry to `.agents/learned/journal.md` (create `.agents/learned/` if needed). Record the input, how you classified it, any corrections, recurring fixes, and the durable lesson (or "none this run"). **Never rewrite earlier entries.**
+2. **Capture durable lessons.** A lesson is durable when it would change a *future* run. Route each one:
+   - a preference/override → edit `.agents/learned/conventions.md` (consolidate into a tight rule set, don't just append);
+   - a classification judgment → add/update a row in `.agents/learned/examples.md`;
+   - a whole new input shape → write a playbook to `.agents/learned/skills/<kebab-name>.md` with a `trigger:` line and steps.
+3. **Surface rule changes for approval.** The journal entry commits freely. Changes to `conventions.md` / `examples.md` / `skills/` are proposals: show the `git diff`, explain each change in one line with its motivating journal entry, and let the user approve before committing.
+
+Corrections are the highest-value signal — when the user fixes something, reflect immediately, not just at the end of the run.
+
+---
+
 ## Error Handling
 
 | Problem | Detection | Resolution |
@@ -404,6 +435,7 @@ If the user explicitly approves Inbox clearing, make that a second, separate com
 
 Run through before Phase 6. Every box must be checked.
 
+- [ ] Recalled learned conventions / examples / playbooks (Phase 0, Step 0)
 - [ ] Input classified and all variables resolved
 - [ ] Target path and profile determined
 - [ ] Folder scaffold and `_index.md` files created
@@ -414,3 +446,4 @@ Run through before Phase 6. Every box must be checked.
 - [ ] Quality pass completed against `.agents/style-guide.md`
 - [ ] Collection committed
 - [ ] Inbox clearing handled per approval policy
+- [ ] Reflected (Phase 7): journal entry appended; any rule updates proposed for review

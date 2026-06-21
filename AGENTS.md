@@ -27,11 +27,12 @@ See `.agents/vault-architecture.md` for the full structural blueprint.
 | File | Scope | Description |
 |---|---|---|
 | `.agents/style-guide.md` | All note writing | Teaching-note voice and quality standard |
-| `.agents/ingestion-workflow.md` | Knowledge ingestion | Full workflow: classify → scaffold → write → review → commit |
+| `.agents/ingestion-workflow.md` | Knowledge ingestion | Full workflow: recall → classify → scaffold → write → review → commit → reflect |
+| `.agents/self-evolution.md` | Learning loop | Recall before a run, reflect after; how the agent improves its own rules |
 | `.agents/obsidian-conventions.md` | All vault work | YAML frontmatter, wikilinks, file naming, canvas rules |
 | `.agents/vault-architecture.md` | Vault structure | Folder roles and cross-linking strategy |
 
-**Read order for ingestion tasks:** `style-guide.md` → `ingestion-workflow.md` (which references the others as needed).
+**Read order for ingestion tasks:** `style-guide.md` → `self-evolution.md` → `ingestion-workflow.md` (which references the others as needed).
 
 **Read order for general vault work:** `obsidian-conventions.md` → `style-guide.md`.
 
@@ -53,6 +54,9 @@ Use `[[path/to/note]]` syntax. Inside tables, escape alias pipes as `[[path\|ali
 
 ### 5. References are shared
 `References/` holds concepts that span multiple branches. Link to existing reference notes rather than duplicating. Add new anchor sources to existing notes when applicable.
+
+### 6. Recall before, reflect after
+This vault is self-evolving. **Before** a run, read `.agents/learned/` (conventions, examples, playbooks) and apply what was learned. **After** a run — and immediately whenever the user corrects you — append a journal entry and propose any durable rule updates for review. The full loop and its drift-control rules live in `.agents/self-evolution.md`. Learned state lives in `.agents/learned/` and is git-tracked; rule changes are surfaced as a diff for approval, never committed silently.
 
 ---
 
