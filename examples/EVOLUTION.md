@@ -10,6 +10,11 @@ as a **Topic Build** and produces [`output/ML/Positional Encoding/`](output/ML/P
 Reasonably — but not yet knowing this vault's taste — it creates a **collection-local**
 concept note at `ML/Positional Encoding/References/Positional Encoding.md`.
 
+> The committed [`output/`](output/) tree **is** this Run 1 state — that's why the
+> concept note still lives inside the collection. We don't commit a second "after"
+> tree; the improvement is captured as a *rule* (below) that the agent applies on the
+> next run, which is the whole point of file-based learning.
+
 ## The correction
 
 You move that concept into the **vault-root** `References/` and link to it instead:

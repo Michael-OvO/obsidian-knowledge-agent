@@ -28,11 +28,11 @@ jobs:
             bash -n "$f"
           done
 
-      - name: Skill references are in sync with .agents/
+      - name: Skill bundle is in sync with sources
         run: |
           bash scripts/sync-skill.sh
-          if ! git diff --quiet -- plugins/obsidian-knowledge/skills/obsidian-knowledge/references; then
-            echo "::error::Skill references are out of sync. Run scripts/sync-skill.sh and commit."
-            git --no-pager diff -- plugins/obsidian-knowledge/skills/obsidian-knowledge/references
+          if ! git diff --quiet -- plugins/obsidian-knowledge/skills/obsidian-knowledge; then
+            echo "::error::Skill bundle is out of sync. Run scripts/sync-skill.sh and commit."
+            git --no-pager diff -- plugins/obsidian-knowledge/skills/obsidian-knowledge
             exit 1
           fi

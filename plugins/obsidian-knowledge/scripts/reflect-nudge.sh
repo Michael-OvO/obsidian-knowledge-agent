@@ -13,10 +13,14 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 [ -d ".agents/learned" ] || exit 0
 
 # Did this session change any markdown notes outside the learned/ dir?
-# git quotes paths containing spaces in porcelain output (e.g. "ML/Some Note.md"),
-# and Obsidian filenames are full of spaces — so tolerate an optional closing quote
-# (or a rename arrow) after the .md, not just end-of-line.
-if ! git status --porcelain 2>/dev/null \
+# Notes:
+#  - --untracked-files=all expands untracked DIRECTORIES into individual files;
+#    without it git collapses a brand-new folder to a single "?? ML/" entry and
+#    the .md match below would miss every note in it (the common first-run case).
+#  - git quotes paths containing spaces in porcelain output (e.g. "ML/Some Note.md"),
+#    and Obsidian filenames are full of spaces — so tolerate an optional closing
+#    quote (or a rename arrow) after the .md, not just end-of-line.
+if ! git status --porcelain --untracked-files=all 2>/dev/null \
      | grep -v '\.agents/learned/' \
      | grep -Eq '\.md("| ->|$)'; then
   exit 0

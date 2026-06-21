@@ -37,10 +37,12 @@ clearly asks for it.
 3. **Execute the workflow** in `references/ingestion-workflow.md`:
    - **Phase 0 — Ingest:** classify the input profile and extract a structural map.
    - **Phases 1–3 — Compile:** scaffold the tree, write content/source/concept notes
-     (ML/Quant notes must hit the three-artifact floor — runnable code + LaTeX +
-     Mermaid), build the concept-graph canvas.
+     (deep ML/Quant notes use the artifacts that teach — runnable code, a LaTeX
+     equation, a diagram — where each earns its place, not to fill a quota), build the
+     concept-graph canvas.
    - **Phases 4–5 — Distribute:** wire prev/next navigation, validate all wikilinks
-     (`scripts/validate_links.py`), run the teaching-quality pass.
+     (run the bundled `scripts/validate_links.py` that sits next to this skill, or the
+     inline check in the workflow's Phase 4), run the teaching-quality pass.
    - **Phase 6 — Commit:** commit the collection; clear `Inbox/` only with explicit
      user approval.
 

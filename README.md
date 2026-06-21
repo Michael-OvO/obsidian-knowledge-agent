@@ -110,7 +110,7 @@ cd obsidian-knowledge-agent
 
 | Stage | Phases | What happens |
 |---|---|---|
-| **Recall** | 0·0 | Load `.agents/learned/` — apply learned conventions, few-shot examples, and matching playbooks. |
+| **Recall** | 0 · Step 0 | Load `.agents/learned/` — apply learned conventions, few-shot examples, and matching playbooks. |
 | **Ingest** | 0 | Classify the input (course / book / paper collection / single source / topic build), extract a structural map, resolve target paths. |
 | **Compile** | 1–3 | Scaffold the folder tree + index files, write teaching-quality content/source/concept notes, build a concept-graph canvas. |
 | **Distribute** | 4–5 | Wire prev/next navigation, validate every wikilink, run a parallel teaching-quality review. |
@@ -122,7 +122,7 @@ The pipeline lives in [`.agents/ingestion-workflow.md`](.agents/ingestion-workfl
 ## What makes the notes good
 
 - **Teaching-note style guide** ([`.agents/style-guide.md`](.agents/style-guide.md)) — notes read like something a human would revisit, with the machinery kept off-stage.
-- **Three-artifact floor** for ML/Quant notes — every technical note ships at least one runnable code block, one LaTeX equation, and one Mermaid diagram.
+- **Artifacts that teach** — deep ML/Quant notes reach for a runnable code block, a LaTeX equation, and a Mermaid diagram where each genuinely helps understanding (and skip any that would just be filler).
 - **Concept-graph canvas** — collections with 3+ units get a [JSON-Canvas](https://jsoncanvas.org/) map linking each concept to the units where it appears.
 - **Link integrity** — a real Python validator ([`validate_links.py`](plugins/obsidian-knowledge/scripts/validate_links.py)) flags every broken wikilink before commit, in the pipeline and in CI.
 - **Parallel workers** — note-writing and the quality pass fan out across multiple agents.
@@ -149,7 +149,7 @@ obsidian-knowledge-agent/              # this repo IS a Claude Code marketplace
 ## Customize
 
 - **Branches:** edit the branch table in `AGENTS.md` and `.agents/vault-architecture.md` to match your domains.
-- **Style:** tune `.agents/style-guide.md` (e.g., relax the three-artifact floor) for your subjects.
+- **Style:** tune `.agents/style-guide.md` (e.g., change which artifacts technical notes reach for, or the default note shapes) for your subjects.
 - **Conventions:** frontmatter, naming, math, and canvas rules live in `.agents/obsidian-conventions.md`.
 - **What it has learned:** read or prune `.agents/learned/` anytime — it's just markdown.
 
