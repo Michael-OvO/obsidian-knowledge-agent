@@ -3,7 +3,7 @@
   "name": "obsidian-knowledge",
   "displayName": "Obsidian Knowledge Agent",
   "version": "2.0.0",
-  "description": "Self-evolving pipeline that turns raw material (PDFs, slides, syllabi, papers, transcripts, URL lists) into teaching-quality Obsidian notes — and learns your vault's conventions from each run.",
+  "description": "Self-evolving knowledge agent for Obsidian — from a quick capture to a full course build, for any subject. Matches structure to the material, fits your vault, and learns your conventions from each run.",
   "author": { "name": "Michael-OvO", "url": "https://github.com/Michael-OvO" },
   "homepage": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
   "repository": "https://github.com/Michael-OvO/obsidian-knowledge-agent",

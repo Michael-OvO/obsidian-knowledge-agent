@@ -1,14 +1,21 @@
 ---
 name: obsidian-knowledge-ingest
-description: Use when transforming raw material (PDFs, docx, slides, syllabi, papers, transcripts, URL lists) into structured, teaching-quality Obsidian notes. Drives a self-evolving recall → ingest → compile → distribute → reflect pipeline that classifies the input, scaffolds a folder tree, writes notes that teach, builds a concept-graph canvas, wires wikilinks, runs a quality pass, then reflects on the run to improve its own rules. Trigger when the user asks to "ingest", "build notes from", or "add to the vault".
+description: Use for any knowledge work in an Obsidian vault — capturing a quick note or link, organizing an Inbox, or turning bigger material (PDFs, docx, slides, syllabi, papers, transcripts, URL lists) into structured, teaching-quality notes. Works for any subject, adapts to the vault it's in, and does as much or as little structuring as the material needs, then reflects on each run to improve its own rules. Trigger on requests like "save this", "make a note on X", "remember this", "organize my inbox", "ingest", "build notes from", "research X and write it up", or "add this to the vault".
 ---
 
 # Obsidian Knowledge Ingest
 
-This skill packages a self-evolving pipeline for turning raw material in an Obsidian
-vault's `Inbox/` into structured, navigable, teaching-quality notes. It **recalls**
-what it learned about your vault before each run and **reflects** afterward to get
-better over time — without any model training.
+This skill helps with any knowledge work in an Obsidian vault — from saving a single
+link to building a whole course's notes. It does as much or as little structuring as
+the material needs, fits the vault it's in, **recalls** what it learned about that
+vault before each run, and **reflects** afterward to get better over time — without
+any model training.
+
+**Match the effort to the material.** Decide the altitude first (see "Choose the
+altitude" in the workflow): a **Capture** is one clean note, a **Small collection** is
+a few notes plus a light index, and only a genuinely large, structured input earns the
+**Full build** below. Default to the lightest touch; escalate only when the material
+clearly asks for it.
 
 ## How to use it
 

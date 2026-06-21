@@ -31,5 +31,5 @@ case "$JLINE" in
   *) exit 0 ;;       # tracked + changed -> reflection recorded; stay quiet
 esac
 
-MSG="obsidian-knowledge: notes changed but the learning journal is untouched. Run /obsidian-knowledge:reflect to capture lessons before finishing."
+MSG="obsidian-knowledge: you changed some notes this session. If anything is worth remembering for next time, /obsidian-knowledge:reflect will capture it — totally optional."
 printf '{"systemMessage": "%s"}\n' "$MSG"

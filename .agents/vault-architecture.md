@@ -10,6 +10,12 @@ tags: [meta, architecture]
 
 Define the stable shape of the vault: top-level folders, folder roles, and how branches relate. For note schema and syntax, defer to `.agents/obsidian-conventions.md`. For writing quality, defer to `.agents/style-guide.md`. For ingestion steps, defer to `.agents/ingestion-workflow.md`.
 
+## Adapt to the vault you're in
+
+The structure below is an **example** for a student/researcher vault. The *model* — a few domain branches, a shared `References/`, a transient `Inbox/` — generalizes to any vault and any subject: a work vault might use `Projects/`, `Meetings/`, `People/`; a research vault `Papers/`, `Ideas/`, `Experiments/`; a personal vault whatever its owner already uses.
+
+**In an existing vault, detect and match what's already there before adding anything.** Read the current top-level folders, naming patterns, and frontmatter, and fit in. Only fall back to the defaults below when the vault is empty or has no clear convention. Preferences you learn about a vault's real shape are recorded in `.agents/learned/`.
+
 ## Folder Structure
 
 ```

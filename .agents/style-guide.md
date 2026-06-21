@@ -10,6 +10,8 @@
 
 The body of a note should read naturally from top to bottom. Tags, dates, source paths, progress state, and other machine-ish context belong in frontmatter, hidden comments, or index files, not as visible scaffolding in the note body.
 
+This applies to **any** subject — a lecture, a meeting, a recipe, a research idea, a clipped article — and it **scales down**. A quick capture is a clean sentence or two with a tag and maybe a link, not a full teaching note. Reserve the heavier treatment below for material that genuinely deserves it; never inflate a small note to fill a template.
+
 For STEM material, "natural" does not mean essayistic or humanities-shaped. The default should be a clear scientific explanation of the problem, mechanism, assumptions, evidence, and limits in the order that best teaches the topic.
 
 For `ML/` and `Quant/` specifically, the default presentation should be short, clean, and bullet-first. The note should still teach rather than dump fragments, but the body should usually be built from tight bullet groups, short numbered sequences, equations, code blocks, and diagrams instead of long prose paragraphs.
@@ -91,7 +93,7 @@ Different notes serve different purposes. The structure should follow the functi
 - **Opening**: Start with 1 short paragraph or 2-4 bullets framing the technical question, bottleneck, or failure mode.
 - **Body**: Use labeled bullet sections. Each section should teach one idea: mechanism, equations, derivation, algorithm, architecture, experiment, empirical pattern, or causal chain.
 - **Headings**: Prefer scientific headings such as `The Question`, `Core Idea`, `Mechanism`, `Algorithm`, `The Math`, `Code`, `Tradeoffs`, `Failure Modes`, `Practical Implications`.
-- **Technical detail — the three-artifact floor**: In `ML/` and `Quant/`, every technical lecture or concept note must include **all three** of: (1) at least one code block, (2) at least one LaTeX equation, and (3) at least one Mermaid diagram. This is a floor, not a ceiling — most notes benefit from more. For other STEM branches, at least one concrete artifact beyond plain text is still expected.
+- **Technical detail — use the artifacts that teach**: a deep `ML/` or `Quant/` note is usually clearest with code, a LaTeX equation, and a Mermaid diagram. Include each one where it genuinely helps a reader understand, and leave out any that would just be decoration. Short notes, overviews, and non-technical notes need none. Aim for understanding, not a quota.
 - **Runnable code, not fragments**: Code blocks should be copy-pasteable — full function definitions with imports, realistic variable names, and a usage example or print statement. Pseudocode is acceptable only when the real implementation requires infrastructure the reader cannot run locally (e.g., multi-node distributed training).
 - **Bullet discipline**: Bullets must carry explanation, not fragments. Good bullets still contain the `because`.
 - **Glossary-style sections**: Optional. Use them only when the note introduces enough standalone terms that collecting them actually helps.

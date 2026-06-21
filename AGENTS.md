@@ -2,13 +2,27 @@
 
 > **For any AI agent (Codex, Claude, Cursor, …) working in this vault.** Read this file first, then follow the instruction modules in `.agents/`.
 
-This vault is driven by a reusable agentic pipeline that turns raw material — PDFs, slides, syllabi, papers, transcripts, URL lists — into structured, teaching-quality notes with navigation and a concept-graph canvas. The pipeline runs in three stages: **ingest → compile → distribute**.
+This vault has a knowledge agent that helps turn anything — a stray thought, a link, a PDF, a transcript, a whole syllabus or book — into notes worth keeping. It works for any subject and any vault: research, coursework, work projects, reading, personal knowledge. It does as much or as little structuring as the material actually needs.
+
+The agent has one job: **leave the vault a little more useful than it found it.** Everything below is in service of that, not the other way around.
+
+---
+
+## How to work
+
+Three principles sit above every rule in `.agents/`:
+
+1. **Match the effort to the material.** A link or a one-line idea becomes a single clean note — no folders, no index, no ceremony. A small reading set becomes a few notes and a light index. Only a genuinely large, structured input (a syllabus, a book, a big paper collection) earns the full scaffold with a concept-graph canvas. Default to the lightest touch that does the job, and escalate only when the material clearly asks for it. See "Choose the altitude" in `.agents/ingestion-workflow.md`.
+
+2. **Follow the vault you're in.** Before creating anything, look at how this vault is already organized — its folders, naming, frontmatter, link style — and fit in. The branches below are sensible defaults for an empty vault; in an existing vault, match what's there rather than imposing a new taxonomy. What the agent learns about a vault's real shape lives in `.agents/learned/`.
+
+3. **Stay natural and low-friction.** Respond to plain requests ("save this", "make a note on X", "organize my inbox", "remember this", "research Y and write it up"), not just formal commands. Do the obvious thing; only stop to ask when an action is destructive or genuinely ambiguous.
 
 ---
 
 ## What This Vault Is
 
-A personal knowledge management system built in [Obsidian](https://obsidian.md/). It stores structured, teaching-quality notes across domain branches. The default branches below are a starting point — rename, add, or remove them to fit your domains.
+A personal knowledge base in [Obsidian](https://obsidian.md/) — structured, teaching-quality notes, organized however suits the work. The branches below are **example defaults**; rename, add, remove, or ignore them to fit your domains, and match an existing vault's structure when there is one.
 
 | Branch | Content | Path |
 |---|---|---|
@@ -18,7 +32,7 @@ A personal knowledge management system built in [Obsidian](https://obsidian.md/)
 | **References** | Shared foundational concepts | `References/{Concept}.md` |
 | **Inbox** | Raw material staging (transient) | `Inbox/` |
 
-See `.agents/vault-architecture.md` for the full structural blueprint.
+These are illustrative. A work vault might use `Projects/`, `Meetings/`, `People/`; a research vault `Papers/`, `Ideas/`, `Experiments/`. See `.agents/vault-architecture.md`.
 
 ---
 

@@ -6,6 +6,20 @@ All notable changes to this project are documented here. The format follows
 
 ## [2.0.0] — 2026-06-20
 
+### Added — natural, adaptive, general-purpose
+- **Altitude tiers**: the agent matches effort to the material — **Capture** (one clean
+  note), **Small collection** (a few notes + a light index), or **Full build** (the full
+  scaffold + concept-graph canvas). The heavy pipeline is now opt-in by signal, not
+  forced on every input.
+- **Fits the vault it's in**: detects and matches an existing vault's folders, naming,
+  and frontmatter instead of imposing the `School/ML/Quant` taxonomy (now just defaults
+  for an empty vault). Works for any subject.
+- **Natural triggers + a quick-capture command** (`/obsidian-knowledge:capture`): responds
+  to plain requests like "save this", "make a note on X", "organize my inbox".
+- **Softened the three-artifact floor**: technical notes use code / equations / diagrams
+  where they genuinely teach, not to satisfy a quota; short and non-technical notes need
+  none.
+
 ### Added — the agent now self-evolves
 - **Recall → reflect learning loop** ([`.agents/self-evolution.md`](.agents/self-evolution.md)):
   the agent reads what it learned about a vault before each run (Phase 0, Step 0) and

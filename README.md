@@ -2,7 +2,7 @@
 
 # Obsidian Knowledge Agent
 
-**A self-evolving agent that turns raw material — PDFs, slides, syllabi, papers, transcripts, URL lists — into structured, teaching-quality Obsidian notes, and learns your vault's conventions from every run.**
+**A self-evolving knowledge agent for Obsidian — from a one-line capture to a full course build. Any subject, any vault. It does as much (or as little) structuring as the material needs, and learns your conventions from every run.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-plugin-7C3AED)](#install)
@@ -13,9 +13,21 @@
 
 ---
 
-Point any agentic coding assistant at your vault, drop sources in `Inbox/`, and ask it to ingest. The agent classifies the input, scaffolds a folder structure, writes notes that actually *teach*, builds a concept-graph canvas, wires the wikilinks, and runs a quality pass.
+Point any agentic coding assistant at your vault and talk to it naturally — *"save this link"*, *"make a note on X"*, *"organize my inbox"*, or *"ingest the syllabus in Inbox"*. It reads how your vault is already organized, matches the effort to the material, and writes notes that actually *teach* — a single clean note for a quick capture, or a fully scaffolded collection with a concept-graph canvas for a whole course. It works for any subject: coursework, research, work projects, reading, personal knowledge.
 
 Then it does something a prompt-pack can't: **it reflects on the run and improves its own rules.** Every correction you make becomes a durable, reviewable lesson — captured as plain markdown in your git history and applied automatically next time. No fine-tuning, no black box.
+
+## Does as much — or as little — as you need
+
+No rigid pipeline forced on every input. The agent picks the **altitude** that fits and escalates only when the material asks for it:
+
+| Altitude | For | What you get |
+|---|---|---|
+| **Capture** | a link, a thought, one article — *"save this"* | one clean note, filed in the right place |
+| **Small collection** | a handful of related sources, a short topic | a few notes + a light index |
+| **Full build** | a syllabus, a book, a big paper set | the full scaffold: indexes, navigation, quality pass, concept-graph canvas |
+
+And it **fits the vault you're already in** — your folders, your naming, your frontmatter — instead of imposing a taxonomy. The academic branches (`School/`, `ML/`, `Quant/`) are just defaults for an empty vault; a work vault's `Projects/ Meetings/ People/` works just as well.
 
 ## Why it's different — it self-evolves
 
@@ -89,9 +101,9 @@ cd obsidian-knowledge-agent
 ## Quickstart
 
 1. Install (above).
-2. Drop a syllabus, paper set, book TOC, or topic brief into `Inbox/`.
-3. In Claude Code: `/obsidian-knowledge:ingest` — or just ask any agent: *"Ingest the material in Inbox into the vault."*
-4. Review the generated collection, then approve clearing `Inbox/`.
+2. **Capture something small:** say *"save this link"* or run `/obsidian-knowledge:capture <url>` — you get one clean note, filed in the right folder.
+3. **Or ingest something bigger:** drop a syllabus, paper set, or book TOC into `Inbox/` and say *"organize my inbox"* or run `/obsidian-knowledge:ingest`. The agent picks the right altitude automatically.
+4. Review what it made, then approve clearing `Inbox/` if relevant.
 5. Correct anything you don't like. Run `/obsidian-knowledge:reflect`, approve the proposed rule diff with `/obsidian-knowledge:evolve`, and the agent won't make that mistake again.
 
 ## The method: recall → ingest → compile → distribute → reflect
@@ -105,7 +117,7 @@ cd obsidian-knowledge-agent
 | **Commit** | 6 | Commit the collection; clear `Inbox/` under an explicit approval policy. |
 | **Reflect** | 7 | Append a journal entry; propose durable rule/playbook updates for your review. |
 
-The pipeline lives in [`.agents/ingestion-workflow.md`](.agents/ingestion-workflow.md).
+The pipeline lives in [`.agents/ingestion-workflow.md`](.agents/ingestion-workflow.md). Lighter captures and small collections run only the stages they need — see [**Choose the altitude**](.agents/ingestion-workflow.md#choose-the-altitude).
 
 ## What makes the notes good
 

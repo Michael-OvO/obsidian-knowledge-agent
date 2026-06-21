@@ -7,7 +7,21 @@
 > - `.agents/obsidian-conventions.md` for frontmatter, links, naming, and canvas rules
 > - `.agents/self-evolution.md` for the recall → reflect learning loop (Phase 0 recall, Phase 7 reflect)
 
-**Purpose:** Transform a syllabus, book, paper collection, article, transcript, or topic brief into a navigable knowledge structure with short, clean, teaching-quality notes plus the metadata and navigation needed to support them.
+**Purpose:** Turn raw material — anything from a single link to a whole syllabus — into notes worth keeping, with exactly as much structure as the material needs and no more.
+
+---
+
+## Choose the altitude
+
+Before anything else, decide how much structure the material actually warrants. Pick the **smallest tier that fits**, and escalate only when the input clearly asks for it.
+
+| Tier | Use when the input is… | What you produce | Phases to run |
+|---|---|---|---|
+| **Capture** | a link, a thought, a single article or transcript, a "save this" | one clean note in the best-fit existing folder | 0 (recall + a quick classify) → write the note → 6 (commit) → 7 (reflect) |
+| **Small collection** | a handful of related sources, or a short topic | a few notes + one light `_index.md` | 0–2, a simple index, 4, 7 |
+| **Full build** | a syllabus, a book, or a large/structured paper collection | the complete scaffold: indexes, source notes, navigation, quality pass, concept-graph canvas | all of 0–7 |
+
+The phases below spell out the **full build**. For lighter tiers, running only the phases listed above — and skipping scaffolds, source notes, the canvas, prev/next chains, and the parallel quality pass — is the *correct* behavior, not a shortcut. Never impose more structure than the material or the user asked for. When torn between two tiers, choose the lighter one and offer to go deeper.
 
 ---
 
@@ -147,7 +161,7 @@ Rules:
 - Apply `.agents/style-guide.md` body-shape rules verbatim
 - **Bullet-first default for `ML/` and `Quant/`:** the body should usually be organized as short explanatory bullet groups, short numbered sequences, equations, code blocks, and diagrams rather than paragraph-heavy prose.
 - **Depth requirement for technical notes:** include enough mechanism, assumptions, tradeoffs, and implementation detail that the note stands on its own as a study resource, not just a summary.
-- **Three-artifact floor for `ML/` and `Quant/`:** every technical lecture or concept note must include **all three** of: (1) at least one runnable code block, (2) at least one LaTeX equation, and (3) at least one Mermaid diagram. Code should be copy-pasteable with imports, not fragments. For other branches, at least one concrete artifact is still expected.
+- **Use the artifacts that teach (technical notes):** a deep `ML/` or `Quant/` note is usually clearest with a runnable code block, a LaTeX equation, and a Mermaid diagram — include each one where it earns its place, and skip any that would just be filler. Code should be copy-pasteable with imports, not fragments. A short note, an overview, or a non-technical note needs none of these. The goal is understanding, not a checklist.
 - **Course:** put week/course metadata in frontmatter or unit indexes; keep the note body reader-facing
 - **Book:** explain the chapter's role naturally instead of using rubric labels
 - **Single Source:** link outward to shared references or related notes when useful
@@ -205,7 +219,7 @@ Parallelism:
 - Tell workers to read `.agents/style-guide.md`; do not paste the whole style guide into the prompt
 - Make explicit that internal analysis should be rewritten into short, clean, reader-facing bullets and numbered sequences rather than hidden rubric prose
 - For STEM material, tell workers to optimize for scientific explanation, not for thesis-driven rhetoric
-- Require workers on `ML/` and `Quant/` notes to hit the three-artifact floor: every note must have at least one runnable code block, one LaTeX equation, and one Mermaid diagram. Code should be copy-pasteable with imports.
+- Tell workers on deep `ML/` and `Quant/` notes to reach for the artifacts that teach — runnable code, an equation, a diagram — using each where it genuinely helps rather than to satisfy a quota. Code should be copy-pasteable with imports.
 
 ---
 
@@ -433,7 +447,7 @@ Corrections are the highest-value signal — when the user fixes something, refl
 
 ## Checklist
 
-Run through before Phase 6. Every box must be checked.
+For a **full build**, run through this before Phase 6. Lighter tiers only need the boxes that apply to them (a Capture, for instance, needs recall, the note itself, links resolving, commit, and reflect — nothing else).
 
 - [ ] Recalled learned conventions / examples / playbooks (Phase 0, Step 0)
 - [ ] Input classified and all variables resolved
