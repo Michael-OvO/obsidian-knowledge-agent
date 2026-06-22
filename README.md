@@ -1,5 +1,7 @@
 <div align="center">
 
+<a href="https://github.com/Codex-Lab-Org"><img src="docs/assets/codex-logo.svg" width="120" height="120" alt="Codex Lab"></a>
+
 # Obsidian Knowledge Agent
 
 **A self-evolving knowledge agent for Obsidian — from a one-line capture to a full course build. Any subject, any vault. It does as much (or as little) structuring as the material needs, and learns your conventions from every run.**
