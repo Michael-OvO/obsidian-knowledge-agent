@@ -29,7 +29,7 @@ import sys
 from pathlib import Path
 
 WIKILINK = re.compile(r"\[\[([^\]]+)\]\]")
-FENCED_CODE = re.compile(r"```.*?```", re.DOTALL)
+FENCED_CODE = re.compile(r"(`{3,}|~{3,}).*?\1", re.DOTALL)  # ``` or ~~~ fences
 INLINE_CODE = re.compile(r"`[^`\n]*`")
 
 

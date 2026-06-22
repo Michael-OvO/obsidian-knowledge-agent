@@ -31,7 +31,7 @@ fi
 
 # Reflection already recorded this session? Suppress only when the journal is TRACKED
 # and changed; an untracked (freshly-seeded) journal must NOT silence the nudge.
-JLINE="$(printf '%s\n' "$STATUS" | grep -E '^.. "?\.agents/learned/journal\.md' | head -1 || true)"
+JLINE="$(printf '%s\n' "$STATUS" | grep -E '^.. "?\.agents/learned/journal\.md("| ->|$)' | head -1 || true)"
 case "$JLINE" in
   "" | "??"*) : ;;   # absent or untracked seed -> not yet reflected; allow the nudge
   *) exit 0 ;;       # tracked + changed -> reflection recorded; stay quiet

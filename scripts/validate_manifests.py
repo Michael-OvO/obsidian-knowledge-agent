@@ -35,7 +35,7 @@ def require(cond: bool, msg: str):
         errors.append(msg)
 
 
-def main() -> int:
+def main() -> None:
     market = load(REPO / ".claude-plugin" / "marketplace.json")
     if market is not None:
         require(bool(market.get("name")), "marketplace.json: missing 'name'")

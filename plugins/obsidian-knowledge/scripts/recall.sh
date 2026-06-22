@@ -39,5 +39,8 @@ PY
 else
   echo "# Learned vault conventions (obsidian-knowledge) — refine the defaults; never"
   echo "# override a core .agents/*.md rule or your explicit instructions. Apply when ingesting:"
-  cat "$CONV"
+  head -c 16000 "$CONV"
+  if [ "$(wc -c < "$CONV")" -gt 16000 ]; then
+    printf '\n\n…(truncated — consolidate .agents/learned/conventions.md)\n'
+  fi
 fi
