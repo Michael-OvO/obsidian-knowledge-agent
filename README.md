@@ -68,7 +68,7 @@ Get the skill, the `/obsidian-knowledge:*` commands, and the self-evolution hook
 /plugin install obsidian-knowledge@obsidian-knowledge-agent
 ```
 
-Then seed a vault with the tool-agnostic rule files + learning state:
+Then run `/obsidian-knowledge:help` to see everything it can do, or `/obsidian-knowledge:setup` to scaffold a vault. Seed a vault with the tool-agnostic rule files + learning state:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- /path/to/your/vault
@@ -108,6 +108,27 @@ cd obsidian-knowledge-agent
 3. **Or ingest something bigger:** drop a syllabus, paper set, or book TOC into `Inbox/` and say *"organize my inbox"* or run `/obsidian-knowledge:ingest`. The agent picks the right altitude automatically.
 4. Review what it made, then approve clearing `Inbox/` if relevant.
 5. Correct anything you don't like. Run `/obsidian-knowledge:reflect`, approve the proposed rule diff with `/obsidian-knowledge:evolve`, and the agent won't make that mistake again.
+
+## Commands
+
+In Claude Code, run `/obsidian-knowledge:help` for an in-tool guide (add a command name for detail, e.g. `/obsidian-knowledge:help research`). The full set — grouped:
+
+| | Command | What it does | Example |
+|---|---|---|---|
+| **Start here** | `/obsidian-knowledge:setup` | Set this folder up as a vault — branches, learning state, dashboard, Inbox | `:setup ML, Quant, Research` |
+| | `/obsidian-knowledge:help` | Show everything the agent can do; `:help <command>` for detail | `:help research` |
+| **Capture & build** | `/obsidian-knowledge:capture` | Save one quick, clean note in the right place | `:capture https://arxiv.org/abs/1706.03762` |
+| | `/obsidian-knowledge:ingest` | Build notes from `Inbox/` (or what you point at) at the right depth | `:ingest` |
+| | `/obsidian-knowledge:research` | Research a topic from the web and write teaching notes with sources | `:research how RoPE works` |
+| | `/obsidian-knowledge:log` | Append a timestamped line to today's daily log | `:log shipped the parser` |
+| **Improve & maintain** | `/obsidian-knowledge:polish` | Improve existing notes in place (defaults to recently changed) | `:polish ML/Transformers` |
+| | `/obsidian-knowledge:refactor` | Reorganize safely and rewire every affected wikilink | `:refactor split the Transformers note` |
+| | `/obsidian-knowledge:doctor` | Health check — broken links, orphans, missing frontmatter | `:doctor` |
+| | `/obsidian-knowledge:clean` | Commit changed notes, clear processed Inbox (with approval), push | `:clean` |
+| **Learn** | `/obsidian-knowledge:reflect` | Capture lessons from recent work; propose rule updates | `:reflect` |
+| | `/obsidian-knowledge:evolve` | Review and approve the agent's proposed rule changes | `:evolve` |
+
+**Try this first:** `:setup` → drop a source in `Inbox/` → `:ingest` → `:polish` → `:reflect`. Every command also works as plain English — *"research X"*, *"organize my inbox"*, *"check my vault for broken links"*.
 
 ## The method: recall → ingest → compile → distribute → reflect
 
