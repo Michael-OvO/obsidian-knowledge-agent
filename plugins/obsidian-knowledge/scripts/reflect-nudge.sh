@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Stop hook: nudge the agent to reflect after it changed notes but left the
-# learning journal untouched. Non-blocking — just a reminder. Self-limiting:
-# once the agent appends to journal.md (i.e. reflection has started), the journal
-# shows as dirty and the nudge goes quiet.
+# Stop hook: gently remind the agent to reflect when notes changed this session but
+# the learning journal is untouched. Emitted as Stop `additionalContext` — non-blocking
+# model-visible feedback (NOT decision:block, so it never forces continuation). The
+# model can act on it (e.g. offer /obsidian-knowledge:reflect). Self-limiting: once
+# the journal is updated (tracked + changed), the reminder goes quiet.
 set -euo pipefail
 
 PROJECT="${CLAUDE_PROJECT_DIR:-$PWD}"
@@ -12,28 +13,29 @@ cd "$PROJECT" 2>/dev/null || exit 0
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 [ -d ".agents/learned" ] || exit 0
 
-# Did this session change any markdown notes outside the learned/ dir?
-# Notes:
-#  - --untracked-files=all expands untracked DIRECTORIES into individual files;
-#    without it git collapses a brand-new folder to a single "?? ML/" entry and
-#    the .md match below would miss every note in it (the common first-run case).
-#  - git quotes paths containing spaces in porcelain output (e.g. "ML/Some Note.md"),
-#    and Obsidian filenames are full of spaces — so tolerate an optional closing
-#    quote (or a rename arrow) after the .md, not just end-of-line.
-if ! git status --porcelain --untracked-files=all 2>/dev/null \
-     | grep -v '\.agents/learned/' \
+# One status scan, reused for both checks. --untracked-files=all expands brand-new
+# untracked folders into individual files (else git collapses them to "?? dir/" and
+# the .md match below would miss every note in a new folder — the common first run).
+STATUS="$(git status --porcelain --untracked-files=all 2>/dev/null || true)"
+[ -n "$STATUS" ] || exit 0
+
+# A changed markdown note outside .agents/learned/?  The learned/ exclusion is anchored
+# to the path field (2 status chars + a space, then an optional quote) so a note that
+# merely mentions that string in its name isn't excluded. git quotes paths containing
+# spaces, so tolerate a closing quote / rename arrow after the .md.
+if ! printf '%s\n' "$STATUS" \
+     | grep -Ev '^.. "?\.agents/learned/' \
      | grep -Eq '\.md("| ->|$)'; then
   exit 0
 fi
 
-# Has reflection already been recorded this session? Suppress the nudge only when the
-# journal is *tracked and changed* (staged or modified). An untracked, freshly-seeded
-# journal is NOT reflection — it must not silence the nudge.
-JLINE="$(git status --porcelain -- '.agents/learned/journal.md' 2>/dev/null | head -1 || true)"
+# Reflection already recorded this session? Suppress only when the journal is TRACKED
+# and changed; an untracked (freshly-seeded) journal must NOT silence the nudge.
+JLINE="$(printf '%s\n' "$STATUS" | grep -E '^.. "?\.agents/learned/journal\.md' | head -1 || true)"
 case "$JLINE" in
-  "" | "??"*) : ;;   # absent or untracked seed -> reflection not yet done; allow nudge
+  "" | "??"*) : ;;   # absent or untracked seed -> not yet reflected; allow the nudge
   *) exit 0 ;;       # tracked + changed -> reflection recorded; stay quiet
 esac
 
-MSG="obsidian-knowledge: you changed some notes this session. If anything is worth remembering for next time, /obsidian-knowledge:reflect will capture it — totally optional."
-printf '{"systemMessage": "%s"}\n' "$MSG"
+MSG="obsidian-knowledge: notes changed this session but the learning journal is untouched. If anything here is worth remembering for next time, consider offering to run /obsidian-knowledge:reflect — optional."
+printf '{"hookSpecificOutput": {"hookEventName": "Stop", "additionalContext": "%s"}}\n' "$MSG"

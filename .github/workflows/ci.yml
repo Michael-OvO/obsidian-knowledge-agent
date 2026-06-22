@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -31,8 +34,11 @@ jobs:
       - name: Skill bundle is in sync with sources
         run: |
           bash scripts/sync-skill.sh
-          if ! git diff --quiet -- plugins/obsidian-knowledge/skills/obsidian-knowledge; then
+          # Use porcelain (not `git diff --quiet`) so NEW untracked bundle files —
+          # e.g. a reference for a freshly added .agents/*.md — also fail the check.
+          if [ -n "$(git status --porcelain -- plugins/obsidian-knowledge/skills/obsidian-knowledge)" ]; then
             echo "::error::Skill bundle is out of sync. Run scripts/sync-skill.sh and commit."
+            git --no-pager status --porcelain -- plugins/obsidian-knowledge/skills/obsidian-knowledge
             git --no-pager diff -- plugins/obsidian-knowledge/skills/obsidian-knowledge
             exit 1
           fi

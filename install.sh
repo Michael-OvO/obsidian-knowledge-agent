@@ -65,6 +65,17 @@ fi
 cleanup() { [[ -n "$CLEANUP" ]] && rm -rf "$CLEANUP"; return 0; }
 trap cleanup EXIT
 
+# Copy an instruction module into place, backing up any existing customized version
+# first so a re-run / upgrade never silently destroys the user's edits.
+install_module() {
+  local src="$1" dest="$2"
+  if [[ -f "$dest" ]] && ! cmp -s "$src" "$dest"; then
+    cp "$dest" "$dest.bak"
+    echo "  note: existing $dest differed; saved your version to $dest.bak"
+  fi
+  cp "$src" "$dest"
+}
+
 install_vault() {
   local vault="$1"
   if [[ -z "$vault" ]]; then
@@ -76,9 +87,12 @@ install_vault() {
     echo "Error: '$vault' is not a directory." >&2
     exit 1
   fi
-  cp "$SRC/AGENTS.md" "$vault/AGENTS.md"
+  install_module "$SRC/AGENTS.md" "$vault/AGENTS.md"
   mkdir -p "$vault/.agents"
-  cp "$SRC/.agents/"*.md "$vault/.agents/"
+  local f
+  for f in "$SRC/.agents/"*.md; do
+    install_module "$f" "$vault/.agents/$(basename "$f")"
+  done
   mkdir -p "$vault/Inbox"
   seed_learned "$vault"
   echo "Installed vault files (AGENTS.md, .agents/, .agents/learned/, Inbox/) into: $vault"
@@ -129,7 +143,7 @@ install_skill() {
   mkdir -p "$dest"
   rm -rf "$dest/obsidian-knowledge"
   cp -R "$SRC/plugins/obsidian-knowledge/skills/obsidian-knowledge" "$dest/"
-  echo "Installed Claude Code skill 'obsidian-knowledge-ingest' into: $dest/obsidian-knowledge"
+  echo "Installed Claude Code skill 'obsidian-knowledge' into: $dest/obsidian-knowledge"
   echo
   echo "Tip: for slash commands (/obsidian-knowledge:ingest, :reflect, :evolve) and the"
   echo "self-evolution hooks, install the full plugin instead of the bare skill:"

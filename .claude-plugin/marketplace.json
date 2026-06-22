@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
   "name": "obsidian-knowledge-agent",
   "owner": {
     "name": "Michael-OvO",

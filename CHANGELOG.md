@@ -35,7 +35,7 @@ All notable changes to this project are documented here. The format follows
   hosting the **`obsidian-knowledge` plugin** (`plugins/obsidian-knowledge/`).
 - Install via `/plugin marketplace add Michael-OvO/obsidian-knowledge-agent` then
   `/plugin install obsidian-knowledge@obsidian-knowledge-agent`.
-- **Slash commands**: `/obsidian-knowledge:ingest`, `:reflect`, `:evolve`.
+- **Slash commands**: `/obsidian-knowledge:capture`, `:ingest`, `:reflect`, `:evolve`.
 - **Hooks**: `SessionStart` auto-recalls learned conventions; `Stop` nudges reflection
   when notes changed but the journal is untouched.
 
