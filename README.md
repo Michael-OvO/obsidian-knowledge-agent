@@ -4,6 +4,7 @@
 
 **A self-evolving knowledge agent for Obsidian — from a one-line capture to a full course build. Any subject, any vault. It does as much (or as little) structuring as the material needs, and learns your conventions from every run.**
 
+[![Part of Codex Lab](https://img.shields.io/badge/Part%20of-Codex%20Lab-6E40C9?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMiAyMSA3djEwbC05IDUtOS01Vjd6Ii8%2BPHBhdGggZD0iTTcuNSA5LjUgMTIgMTJsNC41LTIuNU0xMiAxMnY1Ii8%2BPC9zdmc%2B&logoColor=white&labelColor=1f1f1f)](https://github.com/Codex-Lab-Org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-plugin-7C3AED)](#install)
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20·%20Codex%20·%20Cursor-1f6feb)](#works-with-any-agent)
@@ -156,6 +157,12 @@ obsidian-knowledge-agent/              # this repo IS a Claude Code marketplace
 ## Contributing
 
 Issues and PRs welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md). CI validates the plugin/marketplace manifests and runs the link checker on every PR.
+
+## Part of Codex Lab
+
+This project is part of **[Codex Lab](https://github.com/Codex-Lab-Org)**. Explore the rest of the lab's projects on [GitHub](https://github.com/Codex-Lab-Org).
+
+[![Part of Codex Lab](https://img.shields.io/badge/Part%20of-Codex%20Lab-6E40C9?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMiAyMSA3djEwbC05IDUtOS01Vjd6Ii8%2BPHBhdGggZD0iTTcuNSA5LjUgMTIgMTJsNC41LTIuNU0xMiAxMnY1Ii8%2BPC9zdmc%2B&logoColor=white&labelColor=1f1f1f)](https://github.com/Codex-Lab-Org)
 
 ## License
 
