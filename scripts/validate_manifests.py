@@ -10,6 +10,8 @@ Checks, for CI:
 
 Exits non-zero on the first class of failures found.
 """
+from __future__ import annotations  # keep annotations lazy so this runs on Python 3.8
+
 import json
 import sys
 from pathlib import Path
@@ -62,10 +64,11 @@ def _check_plugin_dir(plugin_dir: Path, expected_name):
     require(data.get("name") == expected_name,
             f"{manifest.relative_to(REPO)}: name '{data.get('name')}' "
             f"!= marketplace entry '{expected_name}'")
-    hooks = data.get("hooks")
-    if isinstance(hooks, str):
-        require((plugin_dir / hooks.lstrip("./")).exists(),
-                f"{manifest.relative_to(REPO)}: hooks path '{hooks}' not found")
+    for key in ("hooks", "commands", "skills"):
+        val = data.get(key)
+        if isinstance(val, str):
+            require((plugin_dir / val.lstrip("./")).exists(),
+                    f"{manifest.relative_to(REPO)}: {key} path '{val}' not found")
 
 
 if __name__ == "__main__":

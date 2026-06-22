@@ -1,5 +1,5 @@
 ---
-name: obsidian-knowledge-ingest
+name: obsidian-knowledge
 description: Use for any knowledge work in an Obsidian vault — capturing a quick note or link, organizing an Inbox, or turning bigger material (PDFs, docx, slides, syllabi, papers, transcripts, URL lists) into structured, teaching-quality notes. Works for any subject, adapts to the vault it's in, and does as much or as little structuring as the material needs, then reflects on each run to improve its own rules. Trigger on requests like "save this", "make a note on X", "remember this", "organize my inbox", "ingest", "build notes from", "research X and write it up", or "add this to the vault".
 ---
 

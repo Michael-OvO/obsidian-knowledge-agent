@@ -18,9 +18,9 @@ the vault holds what the engine learned about **this** vault.
 
 | File | Role | Who writes it | Discipline |
 |---|---|---|---|
-| `journal.md` | Append-only log of every run: input, classification, corrections, fixes | You, automatically | **Append only.** Never edit or delete past entries. |
-| `conventions.md` | Distilled, vault-specific rules that override defaults | You propose; user approves the diff | **Consolidate**, don't just append. Keep it tight. |
-| `examples.md` | Few-shot input→classification decisions | You propose | Capped; most recent wins on conflict. |
+| `journal.md` | Append-only log of every run: input, classification, corrections, fixes | You, automatically | **Append only.** Never edit past entries. When it passes ~200 entries or ~50 KB, move older entries to `journal-archive/{year}.md`. |
+| `conventions.md` | Distilled, vault-specific rules that refine defaults | You propose; user approves the diff | **Consolidate**, don't just append. Keep it tight — aim under ~40 lines; it is injected into context every session. |
+| `examples.md` | Few-shot input→classification decisions | You propose | Keep ≤ ~30 rows; on overflow drop the least-useful/oldest. Most recent wins on conflict. |
 | `skills/<name>.md` | Reusable playbooks for novel source/domain types | You write on novel input | One playbook per distinct input shape. |
 
 If `.agents/learned/` does not exist yet, create it the first time you reflect.
@@ -116,7 +116,11 @@ output worse. Defenses, all built into the loop above:
 - **Append-only journal** preserves the full history; nothing is silently lost.
 - **Consolidation, not accumulation:** `conventions.md` is rewritten to stay minimal
   and consistent — it is a rule set, not a log.
-- **Human-in-the-loop on rule changes:** every override is a reviewed `git diff`.
+- **Bounded by design:** `conventions.md` stays short (it is recalled into context
+  every session), `examples.md` is capped (~30 rows), and `journal.md` is archived
+  once large — so context cost and drift do not grow without limit.
+- **Human-in-the-loop on rule changes:** every learned-rule change is a reviewed
+  `git diff`; `/obsidian-knowledge:evolve` should also flag any journal deletions.
 - **Core rules and the user always win** (see precedence).
 - **Contradiction check:** if a learned rule fights a core rule, drop the learned
   one and note it in the journal.

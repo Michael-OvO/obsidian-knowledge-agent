@@ -77,13 +77,13 @@ The pipeline is defined in plain markdown (`AGENTS.md` + `.agents/`), so it runs
 
 ```bash
 # Into an Obsidian vault (AGENTS.md + .agents/ + a seeded .agents/learned/ + Inbox/)
-curl -fsSL .../install.sh | bash -s -- /path/to/your/vault
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- /path/to/your/vault
 
 # As a bare Claude Code skill (into ~/.claude/skills/)
-curl -fsSL .../install.sh | bash -s -- --skill
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- --skill
 
 # Both at once
-curl -fsSL .../install.sh | bash -s -- --both /path/to/your/vault
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- --both /path/to/your/vault
 ```
 
 <details>
@@ -124,7 +124,7 @@ The pipeline lives in [`.agents/ingestion-workflow.md`](.agents/ingestion-workfl
 - **Teaching-note style guide** ([`.agents/style-guide.md`](.agents/style-guide.md)) — notes read like something a human would revisit, with the machinery kept off-stage.
 - **Artifacts that teach** — deep ML/Quant notes reach for a runnable code block, a LaTeX equation, and a Mermaid diagram where each genuinely helps understanding (and skip any that would just be filler).
 - **Concept-graph canvas** — collections with 3+ units get a [JSON-Canvas](https://jsoncanvas.org/) map linking each concept to the units where it appears.
-- **Link integrity** — a real Python validator ([`validate_links.py`](plugins/obsidian-knowledge/scripts/validate_links.py)) flags every broken wikilink before commit, in the pipeline and in CI.
+- **Link integrity** — a real Python validator ([`validate_links.py`](plugins/obsidian-knowledge/scripts/validate_links.py)) flags broken wikilinks before commit — resolving image/PDF embeds, block (`^`) and heading (`#`) anchors, and aliases the way Obsidian does, and ignoring links inside code. Runs in the pipeline and in CI.
 - **Parallel workers** — note-writing and the quality pass fan out across multiple agents.
 
 ## Repo layout

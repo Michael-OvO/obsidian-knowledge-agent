@@ -7,7 +7,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILL="$ROOT/plugins/obsidian-knowledge/skills/obsidian-knowledge"
 
-# 1. Mirror the canonical instruction modules into the skill's references.
+# 1. Mirror the canonical instruction modules into the skill's references. Recreate
+#    the dir so a deleted/renamed .agents/*.md never leaves a stale reference behind.
+rm -rf "$SKILL/references"
 mkdir -p "$SKILL/references"
 cp "$ROOT/.agents/"*.md "$SKILL/references/"
 echo "Synced .agents/ -> $SKILL/references/"
