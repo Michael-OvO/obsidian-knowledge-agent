@@ -21,6 +21,9 @@ jobs:
       - name: Validate plugin + marketplace manifests
         run: python3 scripts/validate_manifests.py
 
+      - name: Validate commands (frontmatter + help/README in sync)
+        run: python3 scripts/validate_commands.py
+
       - name: Validate example wikilinks
         run: python3 plugins/obsidian-knowledge/scripts/validate_links.py examples/output
 

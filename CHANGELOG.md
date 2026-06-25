@@ -4,6 +4,22 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project aims to follow
 [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] — 2026-06-22
+
+### Added — a full, discoverable command suite
+- Grew from 4 to **12 commands in 4 groups**, surfacing the agent's full power:
+  - **Start here**: `help` (grouped in-tool guide; `:help <command>` for detail), `setup`
+    (initialize a vault — branches, learning state, dashboard, Inbox).
+  - **Capture & build**: `capture`, `ingest`, **`research`** (research a topic from the web
+    and write teaching notes with sources), **`log`** (timestamped daily-log entry).
+  - **Improve & maintain**: **`polish`** (teaching-quality pass on existing notes),
+    **`refactor`** (rename/move/split/merge and rewire every wikilink), **`doctor`**
+    (health check — broken links, orphans, missing frontmatter), **`clean`** (commit /
+    clear processed Inbox / push).
+  - **Learn**: `reflect`, `evolve`.
+- A polished **Commands** section in the README, plus `validate_commands.py` in CI that
+  keeps the command files, `/help`, and the README from drifting out of sync.
+
 ## [2.0.0] — 2026-06-20
 
 ### Added — natural, adaptive, general-purpose
