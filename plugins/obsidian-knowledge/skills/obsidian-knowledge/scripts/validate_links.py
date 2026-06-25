@@ -13,7 +13,7 @@ checks that each resolves to a file in the tree. Resolution mirrors Obsidian:
   heading anchors (``[[note#Section]]``), and block anchors (``[[note^id]]``);
 - supports absolute-from-root, partial, and "shortest path" (bare name) links;
 - matches case-insensitively, as Obsidian does;
-- ignores links inside fenced/inline code, which Obsidian does not render.
+- ignores links inside fenced/inline code and HTML comments, which Obsidian does not render.
 
 Prints one ``BROKEN<TAB>source<TAB>link`` line per unresolved link and exits 1 if
 any are broken; exits 0 when everything resolves; exits 2 if ROOT is missing.
@@ -31,6 +31,7 @@ from pathlib import Path
 WIKILINK = re.compile(r"\[\[([^\]]+)\]\]")
 FENCED_CODE = re.compile(r"(`{3,}|~{3,}).*?\1", re.DOTALL)  # ``` or ~~~ fences
 INLINE_CODE = re.compile(r"`[^`\n]*`")
+HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)         # Obsidian does not render
 
 
 def main() -> int:
@@ -58,6 +59,7 @@ def main() -> int:
         text = src.read_text(errors="ignore")
         text = FENCED_CODE.sub("", text)
         text = INLINE_CODE.sub("", text)
+        text = HTML_COMMENT.sub("", text)
         for raw in WIKILINK.findall(text):
             link = _clean(raw)
             if not link:
