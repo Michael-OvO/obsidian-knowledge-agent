@@ -1,0 +1,25 @@
+{
+  "name": "obsidian-knowledge",
+  "version": "2.0.0",
+  "description": "Self-evolving knowledge agent for Obsidian — from a quick capture to a full course build, for any subject. Matches structure to the material, fits your vault, and learns your conventions from each run.",
+  "author": { "name": "Michael-OvO", "url": "https://github.com/Michael-OvO" },
+  "homepage": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+  "repository": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+  "license": "MIT",
+  "keywords": ["obsidian", "knowledge-management", "pkm", "self-evolving", "notes"],
+  "interface": {
+    "displayName": "Obsidian Knowledge Agent",
+    "shortDescription": "Self-evolving knowledge agent for your Obsidian vault",
+    "longDescription": "Talk to your Obsidian vault in plain language — save a link, organize your inbox, or ingest a whole syllabus into course-grade notes. It matches effort to the material, fits your vault's conventions, writes notes that teach, and reflects on each run to improve its own rules.",
+    "developerName": "Codex Lab",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+    "brandColor": "#6E40C9",
+    "defaultPrompt": [
+      "Save this link to my vault.",
+      "Organize my Inbox.",
+      "Ingest the syllabus in Inbox into a full course build."
+    ]
+  }
+}

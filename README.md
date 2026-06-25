@@ -4,23 +4,54 @@
 
 # Obsidian Knowledge Agent
 
-**A self-evolving knowledge agent for Obsidian — from a one-line capture to a full course build. Any subject, any vault. It does as much (or as little) structuring as the material needs, and learns your conventions from every run.**
+**Talk to your Obsidian vault — it captures links, organizes your inbox, and builds course-grade notes on any subject, then learns your conventions and rewrites its own rules every run.**
 
 [![Part of Codex Lab](https://img.shields.io/badge/Part%20of-Codex%20Lab-6E40C9?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAzMiAzMiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJPcGVuQUkgQ29kZXgiPjx0aXRsZT5PcGVuQUkgQ29kZXg8L3RpdGxlPjxwYXRoIGQ9Ik0yMi4zNTYgMTkuNzk3SDE3LjE3TTkuNjYyIDEyLjI5bDEuOTc5IDMuNTc2YS41MTEuNTExIDAgMCAxLS4wMDUuNTA0bC0xLjk3NCAzLjQwOU0zMC43NTggMTZjMCA4LjE1LTYuNjA3IDE0Ljc1OC0xNC43NTggMTQuNzU4LTguMTUgMC0xNC43NTgtNi42MDctMTQuNzU4LTE0Ljc1OEMxLjI0MiA3Ljg1IDcuODUgMS4yNDIgMTYgMS4yNDJjOC4xNSAwIDE0Ljc1OCA2LjYwOCAxNC43NTggMTQuNzU4WiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS13aWR0aD0iMi40ODQiLz48L3N2Zz4%3D&labelColor=1f1f1f)](https://github.com/Codex-Lab-Org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-plugin-7C3AED)](#install)
+[![Plugin: Claude Code + Codex](https://img.shields.io/badge/plugin-Claude%20Code%20%2B%20Codex-6E40C9)](#install)
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20·%20Codex%20·%20Cursor-1f6feb)](#works-with-any-agent)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/Michael-OvO/obsidian-knowledge-agent?style=social)](https://github.com/Michael-OvO/obsidian-knowledge-agent)
 
 </div>
 
 ---
 
-Point any agentic coding assistant at your vault and talk to it naturally — *"save this link"*, *"make a note on X"*, *"organize my inbox"*, or *"ingest the syllabus in Inbox"*. It reads how your vault is already organized, matches the effort to the material, and writes notes that actually *teach* — a single clean note for a quick capture, or a fully scaffolded collection with a concept-graph canvas for a whole course. It works for any subject: coursework, research, work projects, reading, personal knowledge.
+Point any agentic assistant at your vault and just **talk to it** — *"save this link"*, *"organize my inbox"*, *"ingest the syllabus in Inbox"*. It reads how your vault is already organized, matches effort to the material, and writes notes that actually *teach* — one clean note for a quick capture, or a fully scaffolded collection with a concept-graph canvas for a whole course.
 
-Then it does something a prompt-pack can't: **it reflects on the run and improves its own rules.** Every correction you make becomes a durable, reviewable lesson — captured as plain markdown in your git history and applied automatically next time. No fine-tuning, no black box.
+Then it does what a prompt-pack can't: **it reflects on each run and rewrites its own rules.** Every correction becomes a durable, reviewable lesson in your git history — applied automatically next time. No fine-tuning, no black box.
 
-## Does as much — or as little — as you need
+## Install
+
+Two commands to add the plugin to your agent — the **same flow for Claude Code and OpenAI Codex**:
+
+|  | **Claude Code** | **OpenAI Codex** |
+|---|---|---|
+| **1 · Add the marketplace** | `/plugin marketplace add Michael-OvO/obsidian-knowledge-agent` | `codex plugin marketplace add Michael-OvO/obsidian-knowledge-agent` |
+| **2 · Install the plugin** | `/plugin install obsidian-knowledge@obsidian-knowledge-agent` | `codex plugin add obsidian-knowledge@obsidian-knowledge-agent` |
+
+You get the ingestion skill, the `obsidian-knowledge` commands (`ingest` · `reflect` · `evolve`), and the self-evolution hooks.
+
+<details>
+<summary><b>Don't have Codex yet?</b></summary>
+
+```bash
+curl -fsSL https://chatgpt.com/codex/install.sh | sh   # macOS / Linux
+npm install -g @openai/codex                           # …or npm
+brew install --cask codex                              # …or Homebrew
+```
+
+Windows: `powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"` · or grab the [IDE extension](https://developers.openai.com/codex/ide).
+</details>
+
+Then seed a vault with the rule files + learning state (works with **any** agent):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- /path/to/your/vault
+```
+
+**First run:** say *"save this link"* for one clean note, or drop a syllabus into `Inbox/` and say *"organize my inbox"* — the agent picks the right altitude automatically. Don't like something it did? Run `reflect`, approve the proposed rule diff with `evolve`, and it won't repeat the mistake.
+
+## What you can do
 
 No rigid pipeline forced on every input. The agent picks the **altitude** that fits and escalates only when the material asks for it:
 
@@ -57,58 +88,6 @@ flowchart LR
 
 👉 **See it learn:** [`examples/EVOLUTION.md`](examples/EVOLUTION.md) walks a real before/after — a correction becomes a rule, and the next run gets it right on its own.
 
-## Install
-
-### As a Claude Code plugin (recommended)
-
-Get the skill, the `/obsidian-knowledge:*` commands, and the self-evolution hooks in one step:
-
-```text
-/plugin marketplace add Michael-OvO/obsidian-knowledge-agent
-/plugin install obsidian-knowledge@obsidian-knowledge-agent
-```
-
-Then seed a vault with the tool-agnostic rule files + learning state:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- /path/to/your/vault
-```
-
-### Works with any agent
-
-The pipeline is defined in plain markdown (`AGENTS.md` + `.agents/`), so it runs in **Codex, Cursor, or any agent that reads `AGENTS.md`** — the self-evolution loop included (the hooks are a Claude Code convenience, not a requirement).
-
-```bash
-# Into an Obsidian vault (AGENTS.md + .agents/ + a seeded .agents/learned/ + Inbox/)
-curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- /path/to/your/vault
-
-# As a bare Claude Code skill (into ~/.claude/skills/)
-curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- --skill
-
-# Both at once
-curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- --both /path/to/your/vault
-```
-
-<details>
-<summary>From a clone instead</summary>
-
-```bash
-git clone https://github.com/Michael-OvO/obsidian-knowledge-agent
-cd obsidian-knowledge-agent
-./install.sh /path/to/your/vault     # vault files + learning state
-./install.sh --skill                 # Claude Code skill
-./install.sh --both /path/to/vault   # both
-```
-</details>
-
-## Quickstart
-
-1. Install (above).
-2. **Capture something small:** say *"save this link"* or run `/obsidian-knowledge:capture <url>` — you get one clean note, filed in the right folder.
-3. **Or ingest something bigger:** drop a syllabus, paper set, or book TOC into `Inbox/` and say *"organize my inbox"* or run `/obsidian-knowledge:ingest`. The agent picks the right altitude automatically.
-4. Review what it made, then approve clearing `Inbox/` if relevant.
-5. Correct anything you don't like. Run `/obsidian-knowledge:reflect`, approve the proposed rule diff with `/obsidian-knowledge:evolve`, and the agent won't make that mistake again.
-
 ## The method: recall → ingest → compile → distribute → reflect
 
 | Stage | Phases | What happens |
@@ -130,18 +109,47 @@ The pipeline lives in [`.agents/ingestion-workflow.md`](.agents/ingestion-workfl
 - **Link integrity** — a real Python validator ([`validate_links.py`](plugins/obsidian-knowledge/scripts/validate_links.py)) flags broken wikilinks before commit — resolving image/PDF embeds, block (`^`) and heading (`#`) anchors, and aliases the way Obsidian does, and ignoring links inside code. Runs in the pipeline and in CI.
 - **Parallel workers** — note-writing and the quality pass fan out across multiple agents.
 
+## Works with any agent
+
+The pipeline is defined in plain markdown (`AGENTS.md` + `.agents/`), so it runs in **Claude Code, Codex, Cursor, or any agent that reads `AGENTS.md`** — the self-evolution loop included (the hooks are a convenience, not a requirement).
+
+```bash
+# Into an Obsidian vault (AGENTS.md + .agents/ + a seeded .agents/learned/ + Inbox/)
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- /path/to/your/vault
+
+# As a bare skill (into ~/.claude/skills/)
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- --skill
+
+# Both at once
+curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agent/main/install.sh | bash -s -- --both /path/to/your/vault
+```
+
+<details>
+<summary>From a clone instead</summary>
+
+```bash
+git clone https://github.com/Michael-OvO/obsidian-knowledge-agent
+cd obsidian-knowledge-agent
+./install.sh /path/to/your/vault     # vault files + learning state
+./install.sh --skill                 # bare skill
+./install.sh --both /path/to/vault   # both
+```
+</details>
+
 ## Repo layout
 
 ```text
-obsidian-knowledge-agent/              # this repo IS a Claude Code marketplace
-├── .claude-plugin/marketplace.json    # marketplace manifest
+obsidian-knowledge-agent/              # one repo, a Claude Code AND Codex marketplace
+├── .claude-plugin/marketplace.json    # Claude Code marketplace manifest
+├── .agents/plugins/marketplace.json   # Codex marketplace manifest
 ├── plugins/obsidian-knowledge/        # the plugin
-│   ├── .claude-plugin/plugin.json
+│   ├── .claude-plugin/plugin.json     # Claude plugin manifest
+│   ├── .codex-plugin/plugin.json      # Codex plugin manifest (marketplace card)
 │   ├── skills/obsidian-knowledge/     # the ingestion skill (+ synced references/)
-│   ├── commands/                      # /obsidian-knowledge: ingest · reflect · evolve
+│   ├── commands/                      # ingest · reflect · evolve
 │   ├── hooks/hooks.json               # SessionStart recall + Stop reflect-nudge
 │   └── scripts/                       # recall.sh · reflect-nudge.sh · validate_links.py
-├── AGENTS.md + .agents/               # tool-agnostic source of truth (Codex/Cursor)
+├── AGENTS.md + .agents/               # tool-agnostic source of truth (any agent)
 │   └── self-evolution.md              # the learning loop
 ├── examples/                          # worked run + EVOLUTION.md before/after demo
 └── install.sh                         # one-line installer for vaults & the skill

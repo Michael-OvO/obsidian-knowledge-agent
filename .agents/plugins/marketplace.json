@@ -1,0 +1,22 @@
+{
+  "name": "obsidian-knowledge-agent",
+  "owner": {
+    "name": "Michael-OvO",
+    "url": "https://github.com/Michael-OvO"
+  },
+  "description": "A self-evolving knowledge agent for Obsidian: from a one-line capture to a full course build, for any subject. Matches structure to the material, fits your vault, and learns your conventions from every run.",
+  "plugins": [
+    {
+      "name": "obsidian-knowledge",
+      "source": "./plugins/obsidian-knowledge",
+      "description": "Self-evolving knowledge agent for Obsidian. From a quick capture to a full course build, for any subject — it matches structure to the material, fits your vault's conventions, writes notes that teach, and reflects on each run to improve its own rules.",
+      "version": "2.0.0",
+      "author": { "name": "Michael-OvO", "url": "https://github.com/Michael-OvO" },
+      "homepage": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+      "repository": "https://github.com/Michael-OvO/obsidian-knowledge-agent",
+      "license": "MIT",
+      "keywords": ["obsidian", "knowledge-management", "pkm", "self-evolving", "notes", "skills"],
+      "category": "productivity"
+    }
+  ]
+}
