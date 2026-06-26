@@ -1,0 +1,18 @@
+# Code owners — maintainer review is requested automatically on these paths.
+#
+# These run on contributors' and end users' machines (plugin hooks, the installer,
+# the validators) or gate CI, so changes here always need a verification pass — see
+# the review checklist in CONTRIBUTING.md. To make this *required* (not just
+# requested), enable "Require review from Code Owners" in the branch protection rule
+# for `main`.
+
+# Code that executes on users' machines or gates the build
+/plugins/obsidian-knowledge/scripts/   @Michael-OvO
+/plugins/obsidian-knowledge/hooks/      @Michael-OvO
+/scripts/                               @Michael-OvO
+/install.sh                             @Michael-OvO
+/.github/                               @Michael-OvO
+
+# Plugin + marketplace manifests
+/.claude-plugin/                        @Michael-OvO
+/plugins/obsidian-knowledge/.claude-plugin/  @Michael-OvO

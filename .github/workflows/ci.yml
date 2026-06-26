@@ -27,6 +27,12 @@ jobs:
       - name: Validate example wikilinks
         run: python3 plugins/obsidian-knowledge/scripts/validate_links.py examples/output
 
+      - name: Adversarial tests — wikilink validator
+        run: python3 scripts/test_validators.py
+
+      - name: Adversarial tests — plugin hooks
+        run: bash scripts/test_hooks.sh
+
       - name: Shell scripts parse cleanly
         run: |
           for f in install.sh scripts/*.sh plugins/obsidian-knowledge/scripts/*.sh; do

@@ -25,6 +25,9 @@ contribution loop is fast.
 3. Run the checks CI runs:
    ```bash
    python3 scripts/validate_manifests.py
+   python3 scripts/validate_commands.py
+   python3 scripts/test_validators.py
+   bash   scripts/test_hooks.sh
    python3 plugins/obsidian-knowledge/scripts/validate_links.py examples/output
    for f in install.sh scripts/*.sh plugins/obsidian-knowledge/scripts/*.sh; do bash -n "$f"; done
    ```
@@ -41,6 +44,28 @@ contribution loop is fast.
 - **New input types** belong as playbooks in a user's `.agents/learned/skills/`, not
   hard-coded into the workflow — unless they're broadly useful, in which case propose
   adding them to `.agents/ingestion-workflow.md`.
+
+## Reviewing PRs that touch validators, hooks, or the installer
+
+These paths run on contributors' and end users' machines or gate CI, so a PR that
+changes any of them — `plugins/obsidian-knowledge/scripts/`,
+`plugins/obsidian-knowledge/hooks/`, `scripts/`, `install.sh`, `.github/` — gets an
+extra verification pass before merge. The maintainer is auto-requested via
+[`.github/CODEOWNERS`](.github/CODEOWNERS); the checklist:
+
+- [ ] **Run the adversarial tests** — `python3 scripts/test_validators.py` and
+  `bash scripts/test_hooks.sh` both pass. They are the regression net (CI runs them too),
+  and they catch the subtle bugs a "looks correct" read misses.
+- [ ] **Both copies of `validate_links.py` stay identical** — `bash scripts/sync-skill.sh`
+  leaves no diff (the bundled copy mirrors the canonical one).
+- [ ] **The diff touches only the files it should** — no unexpected files, no edits to
+  unrelated rules, no vendored binaries.
+- [ ] **Shell changes are safe** — `bash -n` clean, sound quoting, no untrusted input
+  reaching `eval` or an unquoted command, `set -euo pipefail` behavior preserved.
+- [ ] **Hook output is checked against the Claude Code hooks docs** — use only fields the
+  platform honors (e.g. Stop uses `hookSpecificOutput.additionalContext`, not `systemMessage`).
+
+When in doubt, run the change against a throwaway vault / temp git repo and watch it behave.
 
 ## Reporting bugs / ideas
 
