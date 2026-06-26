@@ -22,12 +22,21 @@ Then it does what a prompt-pack can't: **it reflects on each run and rewrites it
 
 ## Install
 
-Two commands to add the plugin to your agent — the **same flow for Claude Code and OpenAI Codex**:
+Two commands to add the plugin to your agent — the **same flow for Claude Code and OpenAI Codex**. Run the marketplace command first, then install.
 
-|  | **Claude Code** | **OpenAI Codex** |
-|---|---|---|
-| **1 · Add the marketplace** | `/plugin marketplace add Michael-OvO/obsidian-knowledge-agent` | `codex plugin marketplace add Michael-OvO/obsidian-knowledge-agent` |
-| **2 · Install the plugin** | `/plugin install obsidian-knowledge@obsidian-knowledge-agent` | `codex plugin add obsidian-knowledge@obsidian-knowledge-agent` |
+**Claude Code**
+
+```text
+/plugin marketplace add Michael-OvO/obsidian-knowledge-agent
+/plugin install obsidian-knowledge@obsidian-knowledge-agent
+```
+
+**OpenAI Codex**
+
+```text
+codex plugin marketplace add Michael-OvO/obsidian-knowledge-agent
+codex plugin add obsidian-knowledge@obsidian-knowledge-agent
+```
 
 You get the ingestion skill, the **full `obsidian-knowledge` command suite** ([12 commands](#commands)), and the self-evolution hooks. Run `/obsidian-knowledge:help` anytime, or `:setup` to scaffold a vault from scratch.
 
@@ -55,11 +64,9 @@ curl -fsSL https://raw.githubusercontent.com/Michael-OvO/obsidian-knowledge-agen
 
 No rigid pipeline forced on every input. The agent picks the **altitude** that fits and escalates only when the material asks for it:
 
-| Altitude | For | What you get |
-|---|---|---|
-| **Capture** | a link, a thought, one article — *"save this"* | one clean note, filed in the right place |
-| **Small collection** | a handful of related sources, a short topic | a few notes + a light index |
-| **Full build** | a syllabus, a book, a big paper set | the full scaffold: indexes, navigation, quality pass, concept-graph canvas |
+- **Capture** — a link, a thought, one article (*"save this"*) → one clean note, filed in the right place
+- **Small collection** — a handful of related sources, a short topic → a few notes + a light index
+- **Full build** — a syllabus, a book, a big paper set → the full scaffold: indexes, navigation, quality pass, concept-graph canvas
 
 And it **fits the vault you're already in** — your folders, your naming, your frontmatter — instead of imposing a taxonomy. The academic branches (`School/`, `ML/`, `Quant/`) are just defaults for an empty vault; a work vault's `Projects/ Meetings/ People/` works just as well.
 
@@ -67,20 +74,29 @@ And it **fits the vault you're already in** — your folders, your naming, your 
 
 In Claude Code, run `/obsidian-knowledge:help` for an in-tool guide (add a command name for detail, e.g. `/obsidian-knowledge:help research`). The full set — grouped:
 
-| | Command | What it does | Example |
-|---|---|---|---|
-| **Start here** | `/obsidian-knowledge:setup` | Set this folder up as a vault — branches, learning state, dashboard, Inbox | `:setup ML, Quant, Research` |
-| | `/obsidian-knowledge:help` | Show everything the agent can do; `:help <command>` for detail | `:help research` |
-| **Capture & build** | `/obsidian-knowledge:capture` | Save one quick, clean note in the right place | `:capture https://arxiv.org/abs/1706.03762` |
-| | `/obsidian-knowledge:ingest` | Build notes from `Inbox/` (or what you point at) at the right depth | `:ingest` |
-| | `/obsidian-knowledge:research` | Research a topic from the web and write teaching notes with sources | `:research how RoPE works` |
-| | `/obsidian-knowledge:log` | Append a timestamped line to today's daily log | `:log shipped the parser` |
-| **Improve & maintain** | `/obsidian-knowledge:polish` | Improve existing notes in place (defaults to recently changed) | `:polish ML/Transformers` |
-| | `/obsidian-knowledge:refactor` | Reorganize safely and rewire every affected wikilink | `:refactor split the Transformers note` |
-| | `/obsidian-knowledge:doctor` | Health check — broken links, orphans, missing frontmatter | `:doctor` |
-| | `/obsidian-knowledge:clean` | Commit changed notes, clear processed Inbox (with approval), push | `:clean` |
-| **Learn** | `/obsidian-knowledge:reflect` | Capture lessons from recent work; propose rule updates | `:reflect` |
-| | `/obsidian-knowledge:evolve` | Review and approve the agent's proposed rule changes | `:evolve` |
+**Start here**
+
+- `/obsidian-knowledge:setup` — set this folder up as a vault: branches, learning state, dashboard, Inbox · _e.g._ `:setup ML, Quant, Research`
+- `/obsidian-knowledge:help` — show everything the agent can do; `:help <command>` for detail · _e.g._ `:help research`
+
+**Capture & build**
+
+- `/obsidian-knowledge:capture` — save one quick, clean note in the right place · _e.g._ `:capture https://arxiv.org/abs/1706.03762`
+- `/obsidian-knowledge:ingest` — build notes from `Inbox/` (or what you point at) at the right depth · _e.g._ `:ingest`
+- `/obsidian-knowledge:research` — research a topic from the web and write teaching notes with sources · _e.g._ `:research how RoPE works`
+- `/obsidian-knowledge:log` — append a timestamped line to today's daily log · _e.g._ `:log shipped the parser`
+
+**Improve & maintain**
+
+- `/obsidian-knowledge:polish` — improve existing notes in place (defaults to recently changed) · _e.g._ `:polish ML/Transformers`
+- `/obsidian-knowledge:refactor` — reorganize safely and rewire every affected wikilink · _e.g._ `:refactor split the Transformers note`
+- `/obsidian-knowledge:doctor` — health check: broken links, orphans, missing frontmatter · _e.g._ `:doctor`
+- `/obsidian-knowledge:clean` — commit changed notes, clear processed Inbox (with approval), push · _e.g._ `:clean`
+
+**Learn**
+
+- `/obsidian-knowledge:reflect` — capture lessons from recent work; propose rule updates · _e.g._ `:reflect`
+- `/obsidian-knowledge:evolve` — review and approve the agent's proposed rule changes · _e.g._ `:evolve`
 
 **Try this first:** `:setup` → drop a source in `Inbox/` → `:ingest` → `:polish` → `:reflect`. Every command also works as plain English — *"research X"*, *"organize my inbox"*, *"check my vault for broken links"*.
 
@@ -98,12 +114,10 @@ flowchart LR
     D -.auto-recalled next run.-> A
 ```
 
-| What it learns | Where it's stored | How it's kept safe |
-|---|---|---|
-| Your vault's conventions & style corrections | `.agents/learned/conventions.md` | Proposed as a **git diff you approve** |
-| How to classify *your* kind of inputs | `.agents/learned/examples.md` | Few-shot, capped, recent-wins |
-| Playbooks for brand-new source types | `.agents/learned/skills/*.md` | One playbook per input shape |
-| The full history of every run | `.agents/learned/journal.md` | **Append-only**, never rewritten |
+- **Your vault's conventions & style corrections** → `.agents/learned/conventions.md` — proposed as a **git diff you approve**
+- **How to classify *your* kind of inputs** → `.agents/learned/examples.md` — few-shot, capped, recent-wins
+- **Playbooks for brand-new source types** → `.agents/learned/skills/*.md` — one playbook per input shape
+- **The full history of every run** → `.agents/learned/journal.md` — **append-only**, never rewritten
 
 **Two-tier autonomy:** the journal is written freely; changes to the agent's *rules* are always surfaced as a diff for your approval — so it learns without quietly drifting. See [`.agents/self-evolution.md`](.agents/self-evolution.md) for the full loop and its drift-control rules.
 
@@ -111,14 +125,12 @@ flowchart LR
 
 ## The method: recall → ingest → compile → distribute → reflect
 
-| Stage | Phases | What happens |
-|---|---|---|
-| **Recall** | 0 · Step 0 | Load `.agents/learned/` — apply learned conventions, few-shot examples, and matching playbooks. |
-| **Ingest** | 0 | Classify the input (course / book / paper collection / single source / topic build), extract a structural map, resolve target paths. |
-| **Compile** | 1–3 | Scaffold the folder tree + index files, write teaching-quality content/source/concept notes, build a concept-graph canvas. |
-| **Distribute** | 4–5 | Wire prev/next navigation, validate every wikilink, run a parallel teaching-quality review. |
-| **Commit** | 6 | Commit the collection; clear `Inbox/` under an explicit approval policy. |
-| **Reflect** | 7 | Append a journal entry; propose durable rule/playbook updates for your review. |
+- **Recall** (phase 0 · Step 0) — load `.agents/learned/`: apply learned conventions, few-shot examples, and matching playbooks.
+- **Ingest** (phase 0) — classify the input (course / book / paper collection / single source / topic build), extract a structural map, resolve target paths.
+- **Compile** (phases 1–3) — scaffold the folder tree + index files, write teaching-quality content/source/concept notes, build a concept-graph canvas.
+- **Distribute** (phases 4–5) — wire prev/next navigation, validate every wikilink, run a parallel teaching-quality review.
+- **Commit** (phase 6) — commit the collection; clear `Inbox/` under an explicit approval policy.
+- **Reflect** (phase 7) — append a journal entry; propose durable rule/playbook updates for your review.
 
 The pipeline lives in [`.agents/ingestion-workflow.md`](.agents/ingestion-workflow.md). Lighter captures and small collections run only the stages they need — see [**Choose the altitude**](.agents/ingestion-workflow.md#choose-the-altitude).
 
