@@ -27,7 +27,7 @@ errors: list[str] = []
 
 
 def check_frontmatter(path: Path) -> None:
-    lines = path.read_text().splitlines()
+    lines = path.read_text(encoding="utf-8").splitlines()
     if not lines or lines[0].strip() != "---":
         errors.append(f"{path.name}: missing opening '---' frontmatter")
         return
@@ -50,8 +50,10 @@ def main() -> None:
     for p in cmd_files:
         check_frontmatter(p)
 
-    help_text = HELP.read_text() if HELP.exists() else ""
-    readme_text = README.read_text() if README.exists() else ""
+    # Force UTF-8: these files are full of em-dashes/arrows, and Path.read_text()
+    # defaults to the platform code page (cp1252 on Windows) and would crash there.
+    help_text = HELP.read_text(encoding="utf-8") if HELP.exists() else ""
+    readme_text = README.read_text(encoding="utf-8") if README.exists() else ""
     if not help_text:
         errors.append("help.md not found")
     if not readme_text:

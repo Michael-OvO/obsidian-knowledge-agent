@@ -4,6 +4,20 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project aims to follow
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed — validator edge cases
+- **`validate_manifests.py`**: a `hooks`/`commands`/`skills` path pointing into a
+  dot-directory (e.g. `./.config/hooks.json`) was mangled by `str.lstrip("./")` — which
+  strips a *set of characters*, not a prefix, so it ate the leading dot of the dir — and
+  the path was wrongly reported as missing even when it existed. Now strips only a single
+  leading `./`. Locked in by a new adversarial test in `test_validators.py`.
+- **`validate_commands.py`**: read `README.md`, `help.md`, and the command files with the
+  platform-default encoding, so it crashed on Windows (cp1252) on the em-dashes/arrows they
+  contain. Now forces UTF-8, matching the guard already in `validate_manifests.py`.
+- **`validate_links.py`**: same UTF-8 hardening on note reads, for consistent behavior
+  across platforms.
+
 ## [2.2.0] — 2026-06-25
 
 ### Changed — bolder README, adaptive setup

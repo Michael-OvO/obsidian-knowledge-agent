@@ -93,7 +93,11 @@ def _check_plugin_dir(repo: Path, plugin_dir: Path, expected_name: str,
         for key in ("hooks", "commands", "skills"):
             val = data.get(key)
             if isinstance(val, str):
-                require((plugin_dir / val.lstrip("./")).exists(),
+                # Strip only a leading "./" prefix. NOT val.lstrip("./"), which strips a
+                # *set* of chars and would eat the dot of a dot-dir (e.g. "./.config/x"
+                # -> "config/x"), falsely flagging a real path as missing.
+                rel = val[2:] if val.startswith("./") else val
+                require((plugin_dir / rel).exists(),
                         f"{_rel(manifest, repo)}: {key} path '{val}' not found")
 
 
