@@ -56,7 +56,7 @@ def main() -> int:
     broken = 0
     checked = 0
     for src in md_files:
-        text = src.read_text(errors="ignore")
+        text = src.read_text(encoding="utf-8", errors="ignore")
         text = FENCED_CODE.sub("", text)
         text = INLINE_CODE.sub("", text)
         text = HTML_COMMENT.sub("", text)

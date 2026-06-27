@@ -182,6 +182,17 @@ def _manifest_tests() -> None:
         check("manifests: cross-check catches a plugin-set drift",
               rc != 0 and "plugin (name, source) set" in out)
 
+    # 6. A Claude hooks/commands/skills path pointing into a DOT-directory resolves
+    #    (regression: lstrip("./") used to strip the dot too, falsely flagging it).
+    with tempfile.TemporaryDirectory() as d:
+        r = Path(d)
+        _make_fake_repo(r, claude_plugin={"hooks": "./.config/hooks.json"})
+        hooks_dir = r / "plugins" / "obsidian-knowledge" / ".config"
+        hooks_dir.mkdir(parents=True, exist_ok=True)
+        (hooks_dir / "hooks.json").write_text("{}")
+        rc, out = _run_manifests(r)
+        check("manifests: dot-dir hooks path resolves (no lstrip footgun)", rc == 0)
+
 
 if __name__ == "__main__":
     main()
